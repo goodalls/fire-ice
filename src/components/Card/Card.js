@@ -28,10 +28,10 @@ const Card = (props) => {
 Card.propTypes = {
   name: PropTypes.string,
   founded: PropTypes.string,
-  seats: PropTypes.string,
-  titles: PropTypes.string,
+  seats: PropTypes.array,
+  titles: PropTypes.array,
   coatOfArms: PropTypes.string,
-  ancestralWeapons: PropTypes.string,
+  ancestralWeapons: PropTypes.array,
   words: PropTypes.string
 };
 export default Card;
