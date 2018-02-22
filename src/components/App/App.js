@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes, { shape, func, string } from 'prop-types';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
+import { Card } from '../Card/Card';
 import * as api from '../../api';
 import logo from './logo.svg';
 import './App.css';
-import { Card } from '../Card/Card';
 
 export class App extends Component {
   componentDidMount() {
@@ -20,7 +20,6 @@ export class App extends Component {
   };
 
   housesRenderCheck = () => {
-    console.log(this.props.houses);
     if (!this.props.houses.length) {
       return <div id="wolf" />;
     } else {
@@ -53,7 +52,8 @@ export class App extends Component {
 App.propTypes = {
   fake: PropTypes.string,
   fakeAction: PropTypes.func.isRequired,
-  houses: PropTypes.array
+  houses: PropTypes.array,
+  populate: PropTypes.func
 };
 
 export const mapStateToProps = state => ({
