@@ -1,15 +1,12 @@
-import {fetchParse} from './api';
-
+import { fetchParse } from './api';
 
 describe('FetchParse', () => {
   it('should call fetch with expected params', () => {
-    window.fetch = jest.fn().mockImplimentation(() =>
+    window.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
-       
         json: () =>
           Promise.resolve({
             houses: []
-           
           })
       })
     );
@@ -18,7 +15,11 @@ describe('FetchParse', () => {
     expect(window.fetch).toHaveBeenCalledWith(mockURL);
   });
 
-  it('should', () => {
-  
+  it('should return error if not resolved', () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject('bummer'));
+
+    const mockURL = 'http://happy.com';
+    fetchParse(mockURL);
+    expect(Error).toEqual('bummer');
   });
 });
