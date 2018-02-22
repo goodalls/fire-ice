@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Card = (props) => {
   const {
@@ -24,4 +25,13 @@ const Card = (props) => {
   );
 };
 
+Card.propTypes = {
+  name: PropTypes.string,
+  founded: PropTypes.string,
+  seats: PropTypes.string,
+  titles: PropTypes.string,
+  coatOfArms: PropTypes.string,
+  ancestralWeapons: PropTypes.string,
+  words: PropTypes.string
+};
 export default Card;
