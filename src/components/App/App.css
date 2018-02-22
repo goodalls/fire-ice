@@ -34,7 +34,9 @@
 
 #wolf {
   height: 200px;
-  background-image: url('./wolf.gif')
+  background-image: url('./wolf.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .Display-info {
