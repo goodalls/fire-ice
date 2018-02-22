@@ -12,6 +12,10 @@ export class App extends Component {
     this.requestData();
   }
 
+  componentDidUpdate() {
+    this.swornMembers();
+  }
+
   requestData = async () => {
     const initialFetch = await api.fetchParse(
       'http://localhost:3001/api/v1/houses'
@@ -29,16 +33,29 @@ export class App extends Component {
     }
   };
 
-  swornMembers = () => {
+  swornMembers = async() => {
+    console.log('swornMembers');
+    console.log(this.props.houses);
     if (this.props.houses.length) {
-      this.props.houses.swornMembers.map( async(sworn, index)=>{
-        //"https://www.anapioficeandfire.com/api/characters/255"
-        const id = sworn.split('/').slice(-1);
-        console.log(id)
-        const URL = `http://localhost:3001/api/v1/character/${Number(id)}`;
-        const initialFetch = await api.fetchParse(URL),
-      });
+      const swornPeeps = await this.props.houses.reduce( async(acc, sworn)=>{
+        if (!acc[sworn.name]) {
+          acc[sworn.name] = []
+        }
+
+        acc[sworn.name] = sworn.swornMembers.map(async member=>{
+          //"https://www.anapioficeandfire.com/api/characters/255"
+          const id = member.split('/').slice(-1);
+          console.log(id)
+          const URL = `http://localhost:3001/api/v1/character/${Number(id)}`;
+          const initialFetch = await api.fetchParse(URL);
+          return Promise.all(initialFetch);
+        })
+
+        return acc
+      }, {});
+      console.log(swornPeeps);
     }
+
   }
 
   render() {
