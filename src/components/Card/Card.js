@@ -1,34 +1,37 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export class Card extends Component {
+const Card = (props) => {
+  const {
+    name,
+    founded,
+    seats,
+    titles,
+    coatOfArms,
+    ancestralWeapons,
+    words
+  } = props;
 
+  return (
+    <div className="Card">
+      <h2>{name}</h2>
+      <h4>{words}</h4>
+      <p> Founded:{founded} </p>
+      <p>Seats: {seats}</p>
+      <p>Titles: {titles}</p>
+      <p>Ancestral Weapons: {ancestralWeapons}</p>
+      <p>Coat of Arms: {coatOfArms}</p>
+    </div>
+  );
+};
 
-
-  render() {
-    const {name, founded, seats, titles, coatOfArms, ancestralWeapons, words} = this.props;
-
-    return (
-      <div className='Card'>
-        <h2>{name}</h2>
-        <h4>{words}</h4>
-        <p> Founded:{founded} </p>
-        <p>Seats: {seats}</p>
-        <p>Titles: {titles}</p>
-        <p>Ancestral Weapons: {ancestralWeapons}</p>
-        <p>Coat of Arms: {coatOfArms}</p>
-      </div>
-    );
-  }
-}
-
-export const mapStateToProps = state => ({
-  houses: state.houses
-});
-
-export const mapDispatchToProps = dispatch => ({
-  
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+Card.propTypes = {
+  name: PropTypes.string,
+  founded: PropTypes.string,
+  seats: PropTypes.string,
+  titles: PropTypes.string,
+  coatOfArms: PropTypes.string,
+  ancestralWeapons: PropTypes.string,
+  words: PropTypes.string
+};
+export default Card;
