@@ -9,4 +9,12 @@ describe('ACTIONS INDEX', () => {
     };
     expect(actions.populateHouses(mockHouses)).toEqual(expected);
   });
+  it('should create a SWORN_MEMBERS action', () => {
+    const mockSworn = [{}, {}];
+    const expected = {
+      type: 'SWORN_MEMBERS',
+      members: mockSworn
+    };
+    expect(actions.swornMembers(mockSworn)).toEqual(expected);
+  });
 });

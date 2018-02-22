@@ -5,12 +5,11 @@ import * as api from '../../api';
 import { ok } from 'assert';
 
 describe('APP', () => {
-  //network request failed....
-
   it('should match the snapshot', () => {
     const wrapper = shallow(<App houses={[]} populate={jest.fn()} />);
     expect(wrapper).toMatchSnapshot();
   });
+
   describe('RequestData', () => {
     it('should call api helper function with expected params', async () => {
       const wrapper = shallow(<App houses={[]} populate={jest.fn()} />);
@@ -22,11 +21,26 @@ describe('APP', () => {
       );
     });
   });
+
   describe('housesRenderCheck', () => {
-    it('should', () => {
+    it('should show loading screen if props.houses is not loaded', () => {
       const wrapper = shallow(<App houses={[]} populate={jest.fn()} />);
+      expect(wrapper.instance().housesRenderCheck()).toEqual(<div id="wolf" />)
+    });
+
+    it('should show make <Cards> when props.houses loaded', () => {
+      const wrapper = shallow(<App houses={[{}, {}]} populate={jest.fn()} />);
+      expect(wrapper.instance().housesRenderCheck()).toEqual('[<Card />, <Card />]');
+    });
+
+  });
+
+  describe('SWORN_MEMBERS', () => {
+    it('should', () => {
+    
     });
   });
+  
 
   describe('MSTP and MDTP', () => {
     it('should map fake to props', () => {

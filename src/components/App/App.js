@@ -27,6 +27,7 @@ export class App extends Component {
     if (!this.props.houses.length) {
       return <div id="wolf" />;
     } else {
+      //need to pass swornMembers to cards
       return this.props.houses.map((house, index) => {
         return <Card {...house} key={house.name + index} />;
       });
@@ -49,7 +50,7 @@ export class App extends Component {
         const promises = await Promise.all(swornArray);
         return acc[sworn.name] = promises; 
       }, {});
-      console.log(swornPeeps);
+      this.props.swornMembers(swornPeeps);
     }
   };
 
@@ -82,7 +83,8 @@ App.propTypes = {
 
 export const mapStateToProps = state => ({
   fake: state.fake,
-  houses: state.houses
+  houses: state.houses,
+  swornMembers: state.swornMembers
 });
 
 export const mapDispatchToProps = dispatch => ({

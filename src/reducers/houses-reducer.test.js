@@ -1,4 +1,4 @@
-import {houses} from './houses-reducer';
+import {houses, swornMembers} from './houses-reducer';
 import * as actions from '../actions/index';
 
 describe('HOUSES', () => {
@@ -20,4 +20,20 @@ describe('HOUSES', () => {
     const mockPopulate = [{}, {}];
     expect(houses(mockState, actions.populateHouses(mockPopulate))).toEqual(expected);
   });
+
+  describe('SWORN_MEMBERS', () => {
+    it('should return state by default', () => {
+      const mockState = [{}, {}];
+      const expected = [{}, {}];
+      expect(swornMembers(mockState, {})).toEqual(expected);
+    });
+
+    it('should return new state of SWORN_MEMBERS', () => {
+      const expected = [{}, {}];
+      const mockMembers = [{}, {}];
+      expect(swornMembers(undefined, actions.swornMembers(mockMembers))).toEqual(expected);
+    });
+  });
+  
+
 });
