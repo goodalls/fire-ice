@@ -33,30 +33,25 @@ export class App extends Component {
     }
   };
 
-  swornMembers = async() => {
-    console.log('swornMembers');
-    console.log(this.props.houses);
+  swornMembers = async () => {
     if (this.props.houses.length) {
-      const swornPeeps = await this.props.houses.reduce( async(acc, sworn)=>{
+      const swornPeeps = await this.props.houses.reduce(async (acc, sworn) => {
         if (!acc[sworn.name]) {
-          acc[sworn.name] = []
+          acc[sworn.name] = [];
         }
 
-        acc[sworn.name] = sworn.swornMembers.map(async member=>{
-          //"https://www.anapioficeandfire.com/api/characters/255"
+        const swornArray = await sworn.swornMembers.map(async member => {
           const id = member.split('/').slice(-1);
-          console.log(id)
-          const URL = `http://localhost:3001/api/v1/character/${Number(id)}`;
+          const URL = `http://localhost:3001/api/v1/character/${id}`;
           const initialFetch = await api.fetchParse(URL);
-          return Promise.all(initialFetch);
-        })
-
-        return acc
+          return initialFetch;
+        });
+        const promises = await Promise.all(swornArray);
+        return acc[sworn.name] = promises; 
       }, {});
       console.log(swornPeeps);
     }
-
-  }
+  };
 
   render() {
     return (
@@ -92,7 +87,8 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   fakeAction: () => dispatch(actions.fakeAction()),
-  populate: houses => dispatch(actions.populateHouses(houses))
+  populate: houses => dispatch(actions.populateHouses(houses)),
+  swornMembers: member => dispatch(actions.swornMembers(member))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
