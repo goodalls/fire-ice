@@ -10,7 +10,13 @@ export class Card extends Component {
 
     return (
       <div className='Card'>
-        Card
+        <h2>{name}</h2>
+        <h4>{words}</h4>
+        <p> Founded:{founded} </p>
+        <p>Seats: {seats}</p>
+        <p>Titles: {titles}</p>
+        <p>Ancestral Weapons: {ancestralWeapons}</p>
+        <p>Coat of Arms: {coatOfArms}</p>
       </div>
     );
   }
