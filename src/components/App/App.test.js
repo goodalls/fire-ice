@@ -14,7 +14,7 @@ describe('APP', () => {
   //   expect(wrapper).toMatchSnapshot();
   // });
   describe('RequestData', () => {
-    // window.fetch = jest.fn().mockImplimentation(() =>
+    // window.fetch = jest.fn().mockImplementation(() =>
     //   Promise.resolve({
     //     result: ok,
     //     json: () =>
