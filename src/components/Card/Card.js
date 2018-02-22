@@ -2,22 +2,27 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 export class Card extends Component {
+
+
+
   render() {
+    const {name, founded, seats, titles, coatOfArms, ancestralWeapons, words} = this.props;
+
     return (
-      <div>
+      <div className='card'>
         
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
+  houses: state.houses
+});
+
+export const mapDispatchToProps = dispatch => ({
   
 });
 
-const mapDispatchToProps = dispatch ({
-  
-});
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card)
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
