@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as api from '../../api';
 import logo from './logo.svg';
 import './App.css';
+import {Card} from '../Card/Card'; 
 
 export class App extends Component {
 
@@ -17,18 +18,31 @@ export class App extends Component {
     this.props.populate(initialFetch)
   }
 
+  housesRenderCheck = () => {
+    if (this.props.houses) {
+      <div id='wolf'></div>;
+    } else {
+      this.props.houses.map((house, index)=> {
+        <Card {...house} key={house.name + index} />;
+      });
+    }
+  }
+
   render() {
     return (
       <div className='App'>
         <div className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
           <h2>Welcome to Westeros</h2>
-          <button onClick={() => {
+          
+          {/* <button onClick={() => {
             this.props.fakeAction();
             alert(this.props.fake);
-          }}> FAKE ACTION</button>
+          }}> FAKE ACTION</button> */}
+
         </div>
         <div className='Display-info'>
+        {this.housesRenderCheck()}
         </div>
       </div>
     );
@@ -37,11 +51,13 @@ export class App extends Component {
 
 App.propTypes = {
   fake: PropTypes.string,
-  fakeAction: PropTypes.func.isRequired
+  fakeAction: PropTypes.func.isRequired,
+  houses: PropTypes.array
 };
 
 export const mapStateToProps = (state) => ({ 
-  fake: state.fake 
+  fake: state.fake,
+  houses: state.houses
 });
 
 
