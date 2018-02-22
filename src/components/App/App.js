@@ -19,11 +19,12 @@ export class App extends Component {
   }
 
   housesRenderCheck = () => {
-    if (this.props.houses) {
-      <div id='wolf'></div>;
+    console.log(this.props.houses);
+    if (!this.props.houses.length) {
+      return <div id='wolf'></div>;
     } else {
-      this.props.houses.map((house, index)=> {
-        <Card {...house} key={house.name + index} />;
+      return this.props.houses.map((house, index)=> {
+        return <Card {...house} key={house.name + index} />;
       });
     }
   }

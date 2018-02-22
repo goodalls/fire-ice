@@ -9,8 +9,8 @@ export class Card extends Component {
     const {name, founded, seats, titles, coatOfArms, ancestralWeapons, words} = this.props;
 
     return (
-      <div className='card'>
-        
+      <div className='Card'>
+        Card
       </div>
     );
   }
