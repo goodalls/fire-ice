@@ -12,6 +12,10 @@ export class App extends Component {
     this.requestData();
   }
 
+  componentDidUpdate() {
+    this.swornMembers();
+  }
+
   requestData = async () => {
     const initialFetch = await api.fetchParse(
       'http://localhost:3001/api/v1/houses'
@@ -29,17 +33,25 @@ export class App extends Component {
     }
   };
 
-  swornMembers = () => {
+  swornMembers = async () => {
     if (this.props.houses.length) {
-      this.props.houses.swornMembers.map( async(sworn, index)=>{
-        //"https://www.anapioficeandfire.com/api/characters/255"
-        const id = sworn.split('/').slice(-1);
-        console.log(id)
-        const URL = `http://localhost:3001/api/v1/character/${Number(id)}`;
-        const initialFetch = await api.fetchParse(URL),
-      });
+      const swornPeeps = await this.props.houses.reduce(async (acc, sworn) => {
+        if (!acc[sworn.name]) {
+          acc[sworn.name] = [];
+        }
+
+        const swornArray = await sworn.swornMembers.map(async member => {
+          const id = member.split('/').slice(-1);
+          const URL = `http://localhost:3001/api/v1/character/${id}`;
+          const initialFetch = await api.fetchParse(URL);
+          return initialFetch;
+        });
+        const promises = await Promise.all(swornArray);
+        return acc[sworn.name] = promises; 
+      }, {});
+      console.log(swornPeeps);
     }
-  }
+  };
 
   render() {
     return (
@@ -75,7 +87,8 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   fakeAction: () => dispatch(actions.fakeAction()),
-  populate: houses => dispatch(actions.populateHouses(houses))
+  populate: houses => dispatch(actions.populateHouses(houses)),
+  swornMembers: member => dispatch(actions.swornMembers(member))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { fake } from './fake-reducer';
-import { houses } from './houses-reducer';
+import { houses, swornMembers} from './houses-reducer';
+
 
 const rootReducer = combineReducers({
   fake,
-  houses
+  houses,
+  swornMembers
 });
 
 
