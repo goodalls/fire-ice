@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes, { shape, func, string } from 'prop-types';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
-import { Card } from '../Card/Card';
+import Card from '../Card/Card';
 import * as api from '../../api';
 import logo from './logo.svg';
 import './App.css';
@@ -51,7 +51,7 @@ export class App extends Component {
 
 App.propTypes = {
   fake: PropTypes.string,
-  fakeAction: PropTypes.func.isRequired,
+  fakeAction: PropTypes.func,
   houses: PropTypes.array,
   populate: PropTypes.func
 };
