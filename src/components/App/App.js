@@ -4,7 +4,13 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import { fakeAction } from '../../actions';
+import * as api from '../../api';
+
 class App extends Component {
+
+  requestData = async() => {
+    const initialFetch = await api.fetchParse('http://localhost:3001/api/v1/houses');
+  }
 
   render() {
     return (
