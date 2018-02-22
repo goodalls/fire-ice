@@ -7,3 +7,4 @@ export const fetchParse = async (URL) => {
     // throw (new Error(error));
   }
 };
+

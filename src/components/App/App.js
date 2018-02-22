@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { shape, func, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import Card from '../Card/Card';
@@ -28,6 +28,18 @@ export class App extends Component {
       });
     }
   };
+
+  swornMembers = () => {
+    if (this.props.houses.length) {
+      this.props.houses.swornMembers.map( async(sworn, index)=>{
+        //"https://www.anapioficeandfire.com/api/characters/255"
+        const id = sworn.split('/').slice(-1);
+        console.log(id)
+        const URL = `http://localhost:3001/api/v1/character/${Number(id)}`;
+        const initialFetch = await api.fetchParse(URL),
+      });
+    }
+  }
 
   render() {
     return (
