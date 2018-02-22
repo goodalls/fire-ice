@@ -24,18 +24,21 @@ describe('FetchParse', () => {
           })
       })
     );
-    const expected = { houses: []};
+    const expected = { houses: [] };
     const mockURL = 'http://happy.com';
     expect(fetchParse(mockURL)).resolves.toEqual(expected);
   });
 
-  it('should return error if not resolved', async() => {
-    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-      json: () => Promise.resolve({
-        error: 'bummer',
-        status: 500
+  it('should return error if not resolved', async () => {
+    window.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            error: 'bummer',
+            status: 500
+          })
       })
-    }));
+    );
 
     const mockURL = 'http://happy.com';
     const wrapper = await fetchParse(mockURL);
