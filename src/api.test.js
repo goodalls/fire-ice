@@ -16,7 +16,10 @@ describe('FetchParse', () => {
   });
 
   it('should return error if not resolved', () => {
-    window.fetch = jest.fn().mockImplementation(() => Promise.reject('bummer'));
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      error: 'bummer',
+      status: 500
+    }));
 
     const mockURL = 'http://happy.com';
     fetchParse(mockURL);
